@@ -1,7 +1,7 @@
 package main
 
 /*
-#cgo LDFLAGS: -lX11
+#cgo LDFLAGS: -lX11 -Wl,--allow-multiple-definition
 #include <stdio.h>
 #include <X11/Xlib.h>
 
@@ -12,6 +12,7 @@ unsigned int mask;
 Display *display;
 Bool running;
 XEvent evt;
+
 static void init() {
 	display = XOpenDisplay(NULL);
 }

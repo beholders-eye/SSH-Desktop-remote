@@ -1,16 +1,17 @@
 package main
 
 /*
-#cgo LDFLAGS: -lX11
+#cgo LDFLAGS: -lX11 -Wl,--allow-multiple-definition
+#include <stdio.h>
+#include <ctype.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/XKBlib.h>
-#include <stdio.h>
-#include <ctype.h>
-Bool running;
 
 extern void keyboardEvent(char*,int);
+
+Bool running;
 
 static void startKeyboardListener() {
 	Display *display = XOpenDisplay(NULL);
