@@ -15,28 +15,28 @@ Bool running;
 
 static void startKeyboardListener() {
 	Display *display = XOpenDisplay(NULL);
-    XGrabKeyboard(display, DefaultRootWindow(display), True, GrabModeAsync, GrabModeAsync, CurrentTime);
-    XEvent event;
-    running = True;
-    while(running) {
-        XNextEvent(display, &event);
-        switch (event.type){
-            case KeyPress: {
-                int a;
-                char *key = XKeysymToString(*XGetKeyboardMapping(display,event.xkey.keycode,1,&a));
-                keyboardEvent(key,1);
-                continue;
-            }
-            case KeyRelease: {
-                int a;
-                char *key = XKeysymToString(*XGetKeyboardMapping(display,event.xkey.keycode,1,&a));
-                keyboardEvent(key,0);
-                continue;
-            }
-        }
-    }
-    XUngrabKeyboard(display, CurrentTime);
-    XFlush(display);
+	XGrabKeyboard(display, DefaultRootWindow(display), True, GrabModeAsync, GrabModeAsync, CurrentTime);
+	XEvent event;
+	running = True;
+	while(running) {
+			XNextEvent(display, &event);
+			switch (event.type){
+					case KeyPress: {
+							int a;
+							char *key = XKeysymToString(*XGetKeyboardMapping(display,event.xkey.keycode,1,&a));
+							keyboardEvent(key,1);
+							continue;
+					}
+					case KeyRelease: {
+							int a;
+							char *key = XKeysymToString(*XGetKeyboardMapping(display,event.xkey.keycode,1,&a));
+							keyboardEvent(key,0);
+							continue;
+					}
+			}
+	}
+	XUngrabKeyboard(display, CurrentTime);
+	XFlush(display);
 }
 static void releaseKeyboard() {
 	running = False;
