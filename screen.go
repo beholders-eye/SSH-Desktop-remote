@@ -19,7 +19,7 @@ static int* getScreenSize(){
 import "C"
 import "unsafe"
 
-func getDisplaySize() (int,int) {
+func getDisplaySize() (int, int) {
 	var srceenSize *C.int = C.getScreenSize()
 	length := 2
 	slice := (*[1 << 28]C.int)(unsafe.Pointer(srceenSize))[:length:length]

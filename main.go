@@ -4,9 +4,9 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	ioutil "os"
 	"net"
 	"os"
+	ioutil "os"
 	"os/exec"
 	"os/user"
 	"strconv"
@@ -34,15 +34,14 @@ type argT struct {
 	ShowMouse   bool   `cli:"e,showmouse" usage:"Don't hide mouse even if unclutter is installed" dft:"false"`
 }
 
-//Enabled a struct
+// Enabled a struct
 type Enabled struct {
 	mu      sync.Mutex
 	enabled bool
 }
 
 const (
-	// TODO support and env var
-	remoteTool = "dotool "
+	remoteTool = "dotool"
 )
 
 var e *Enabled
@@ -287,12 +286,12 @@ func remoteMouseButton(stdin io.WriteCloser, button, state int) {
 	if state == 1 {
 		sstate = "mousedown"
 	}
-	cmd := remoteTool + sstate + " " + strconv.Itoa(button) + "\n"
+	cmd := sstate + " " + strconv.Itoa(button) + " | " + remoteTool + "\n"
 	stdin.Write([]byte(cmd))
 }
 
 func moveRemoteMouse(stdin io.WriteCloser, dx, dy int) {
-	cmd := remoteTool + "mousemove_relative -- " + strconv.Itoa(dx) + " " + strconv.Itoa(dy) + "\n"
+	cmd := "mousemove_relative -- " + strconv.Itoa(dx) + " " + strconv.Itoa(dy) + " | " + remoteTool + "\n"
 	stdin.Write([]byte(cmd))
 }
 
@@ -325,5 +324,5 @@ func pressRemoteKey(stdin io.WriteCloser, mouseToggle bool, key string, pressed 
 	if !pressed {
 		cmd = "keyup"
 	}
-	stdin.Write([]byte(remoteTool + cmd + " " + key + "\n"))
+	stdin.Write([]byte(cmd + " " + key + " | " + remoteTool + "\n"))
 }
