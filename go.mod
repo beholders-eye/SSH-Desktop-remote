@@ -5,6 +5,7 @@ go 1.23
 require (
 	github.com/mkideal/cli v0.2.7
 	golang.org/x/crypto v0.31.0
+	golang.org/x/term v0.27.0
 )
 
 require (
@@ -13,5 +14,4 @@ require (
 	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/mkideal/expr v0.1.0 // indirect
 	golang.org/x/sys v0.28.0 // indirect
-	golang.org/x/term v0.27.0 // indirect
 )

@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
-	"io/ioutil"
+	ioutil "os"
 	"net"
 	"os"
 	"os/exec"
@@ -18,7 +18,7 @@ import (
 	"github.com/mkideal/cli"
 	"golang.org/x/crypto/ssh"
 	"golang.org/x/crypto/ssh/agent"
-	"golang.org/x/crypto/ssh/terminal"
+	terminal "golang.org/x/term"
 )
 
 type argT struct {
