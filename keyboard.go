@@ -1,7 +1,9 @@
 package main
 
 /*
-#cgo LDFLAGS: -lX11 -Wl,--allow-multiple-definition
+#cgo linux LDFLAGS: -lX11 -Wl,--allow-multiple-definition
+#cgo darwin LDFLAGS: -lX11 -L/opt/homebrew/lib
+#cgo darwin CFLAGS: -I/opt/homebrew/include -fcommon
 #include <stdio.h>
 #include <ctype.h>
 #include <X11/X.h>
