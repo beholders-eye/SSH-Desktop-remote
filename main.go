@@ -40,6 +40,11 @@ type Enabled struct {
 	enabled bool
 }
 
+const (
+	// TODO support and env var
+	remoteTool = "dotool "
+)
+
 var e *Enabled
 var stdin io.WriteCloser
 var help = cli.HelpCommand("display help information")
@@ -282,12 +287,12 @@ func remoteMouseButton(stdin io.WriteCloser, button, state int) {
 	if state == 1 {
 		sstate = "mousedown"
 	}
-	cmd := "xdotool " + sstate + " " + strconv.Itoa(button) + "\n"
+	cmd := remoteTool + sstate + " " + strconv.Itoa(button) + "\n"
 	stdin.Write([]byte(cmd))
 }
 
 func moveRemoteMouse(stdin io.WriteCloser, dx, dy int) {
-	cmd := "xdotool mousemove_relative -- " + strconv.Itoa(dx) + " " + strconv.Itoa(dy) + "\n"
+	cmd := remoteTool + "mousemove_relative -- " + strconv.Itoa(dx) + " " + strconv.Itoa(dy) + "\n"
 	stdin.Write([]byte(cmd))
 }
 
@@ -320,5 +325,5 @@ func pressRemoteKey(stdin io.WriteCloser, mouseToggle bool, key string, pressed 
 	if !pressed {
 		cmd = "keyup"
 	}
-	stdin.Write([]byte("xdotool " + cmd + " " + key + "\n"))
+	stdin.Write([]byte(remoteTool + cmd + " " + key + "\n"))
 }
